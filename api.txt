@@ -1,0 +1,110 @@
+<foldername> script
+// // console.log("Running");
+// // const array =["a","b","c","d"];
+// // array.push("e");
+// // const newarray = [...array,"f"];
+// // console.log(newarray);
+
+// // function newFun(){
+    
+// //     return 10;
+// // }
+// // console.log(newFun());
+
+// // const newFunc=()=>10
+// // console.log(newFunc());
+
+// // setInterval(()=>{
+// //     console.log("Running");
+// // },5000);
+
+// // setTimeout(()=>{
+// //     console.log("Finished");
+// // },5000);
+
+// const interval =setInterval(()=>{
+//     console.log("Running");
+// },1000);
+
+// setTimeout(()=>{
+//     clearInterval(interval);
+// },3000);
+// console.log(__filename);
+// console.log(__dirname);
+const path  = require("path");
+console.log(path.basename(__filename));
+
+//output will be script.js
+const path1  = require("path");
+console.log(path1.extname(__filename));
+//output will extension of file
+const path2  = require("path");
+console.log(path2.dirname(__filename));
+
+// script.js
+// .js
+// C:\Users\ASUS\OneDrive\Desktop\node
+const path3  = require("path");
+console.log(path3.join(__dirname,"api","script.js"));
+
+const path = require("path");
+const fs = require("fs");
+
+fs.mkdir(path.join(__dirname,"/api"),(err)=>{
+    if(err) throw err;
+})
+// console.log(fs);
+//act as help menu
+
+
+const path = require("path");
+const fs = require("fs");
+
+fs.mkdir(path.join(__dirname,"/api/api2"),(err)=>{
+    if(err) throw err;
+})
+// console.log(fs);
+//act as help menu
+
+
+const path = require("path");
+const fs = require("fs");
+
+fs.rm(path.join(__dirname,"/api2"),{recursive:true},(err)=>{
+    if(err) throw err;
+})
+// console.log(fs);
+const path = require("path");
+const fs = require("fs");
+const user = "NiV";
+// fs.writeFile(path.join(__dirname,"/api","api.txt"),`user name:${user}`,(err)=>{
+//     if(err) throw err;
+// });
+// console.log(fs);
+// act as help menu
+// fs.appendFile(path.join(__dirname,"/api","api.txt"),`\n \t user name:${user}`,(err)=>{ 
+// if (err) throw err;
+// });
+fs.readFile(path.join(__dirname,"/api","api.txt"),"utf8",(err,data)=>{ 
+    if (err) throw err;
+    console.log(data);
+    });
+    const EventEmitter = require("events");
+const server = new EventEmitter();
+
+server.on("request",(req)=>{
+    console.log(`Received request: ${req.url})`);
+    if(req.url ==='/error'){
+        server.emit("error",new Error("An error occurred"));
+    }else{
+        console.log(`processing request for ${req.url}`);
+    }
+})
+
+server.on("error",(err)=>{
+    console.error(`Received error: ${err.message}`);
+})
+
+server.emit("request",{url:"/home"});
+server.emit("request",{url:"/about"});
+server.emit("request",{url:"/error"});
