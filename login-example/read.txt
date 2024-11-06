@@ -1,0 +1,3 @@
+after going to your directory folder
+1.npm init -y  
+2.npm install express express-session body-parser
